@@ -1,0 +1,386 @@
+/* ===== PALETA GLOBAL ===== */
+:root {
+  --rosado-claro: #f8c8dc;
+  --rosado-oscuro: #e09bb5;
+  --rosado-oscuro-2: #c77a97;
+  --blanco: #ffffff;
+  --gris-texto: #444444;
+  --gris-fondo: #fafafa;
+  --sombra: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --radius: 14px;
+  --transition: 0.25s ease;
+}
+
+/* Cerrar Sesión */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.btn-logout {
+  background-color: #c77a97;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-logout:hover {
+  background-color: #b06985;
+}
+
+/* ===== CONTENEDOR GENERAL DEL ADMIN ===== */
+.admin-panel-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: var(--blanco);
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  font-family: "Poppins", sans-serif;
+  color: var(--gris-texto);
+}
+
+/* ===== TÍTULO ===== */
+h2 {
+  text-align: center;
+  color: var(--rosado-oscuro);
+  margin-bottom: 20px;
+}
+
+/* ===== TABS (Cursos / Reservas) ===== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.tabs button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 30px;
+  background: var(--rosado-claro);
+  color: var(--gris-texto);
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tabs button:hover {
+  background: var(--rosado-oscuro);
+  color: white;
+}
+
+.tabs .active {
+  background: var(--rosado-oscuro-2);
+  color: white;
+  box-shadow: 0 5px 12px rgba(199, 122, 151, 0.4);
+}
+
+/* ====================================================== */
+/* ===================== RESERVAS ======================= */
+/* ====================================================== */
+
+.reserva-card {
+  background: var(--gris-fondo);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e5e5;
+  transition: transform var(--transition);
+}
+
+.reserva-card:hover {
+  transform: translateY(-3px);
+}
+
+.reserva-card h3 {
+  color: var(--rosado-oscuro);
+  margin-bottom: 6px;
+}
+
+/* Fotos */
+.fotos-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.fotos-container img {
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.fotos-container img:hover {
+  transform: scale(1.06);
+  border-color: var(--rosado-oscuro);
+}
+
+/* Modal */
+.modal-fotos {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.modal-content img {
+  width: 550px;
+  max-width: 90%;
+  border-radius: 12px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content .prev,
+.modal-content .next {
+  position: absolute;
+  top: 50%;
+  font-size: 32px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.modal-content .prev {
+  left: -45px;
+}
+
+.modal-content .next {
+  right: -45px;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: none;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-eliminar:hover {
+  background: #ff4c4c;
+}
+
+/* ====================================================== */
+/* ====================== CURSOS ======================== */
+/* ====================================================== */
+
+.curso-admin-card {
+  background: var(--gris-fondo);
+  padding: 18px;
+  border-radius: var(--radius);
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  box-shadow: var(--sombra);
+}
+
+.curso-admin-card h3 {
+  margin-bottom: 10px;
+  color: var(--rosado-oscuro);
+}
+
+/* Inputs cupos */
+.cupo-input {
+  width: 70px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #c77a97;
+  text-align: center;
+  font-size: 15px;
+}
+
+.btn-save {
+  padding: 8px 14px;
+  background: #4caf50;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-save:hover {
+  background: #3c8a40;
+}
+
+/* Badges (Estados del Cupo) */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  font-weight: bold;
+}
+
+.badge-ok {
+  background: #4caf50;
+}
+
+.badge-low {
+  background: #ff9800;
+}
+
+.badge-full {
+  background: #e53935;
+}
+
+/* Fondo oscuro */
+.modal-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Caja */
+.modal-success {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+  width: 330px;
+  animation: popIn 0.25s ease-out;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Icono */
+.modal-success .icon {
+  font-size: 45px;
+  color: #27ae60;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Texto */
+.modal-success p {
+  font-size: 17px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Botón */
+.modal-success button {
+  padding: 10px 20px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.modal-success button:hover {
+  background: #219150;
+}
+
+/* Animación */
+@keyframes popIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Botones del modal de confirmación */
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.btn-confirm {
+  padding: 10px 18px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-confirm:hover {
+  background: #1e8a4b;
+}
+
+.btn-cancel {
+  padding: 10px 18px;
+  background: #e53935;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-cancel:hover {
+  background: #c62828;
+}
+
+/* Boton de reiniciar curso */
+
+.btn-reiniciar {
+  background: #e09bb5;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+  background: #c77a97;
+  transform: scale(1.03);
+}
+
+.btn-reiniciar-active {
+  transform: scale(0.97);
+}

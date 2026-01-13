@@ -1,0 +1,487 @@
+/* Reserva.css - Estilo completo para ReservaCompleta */
+
+/* colores y tokens */
+:root {
+  --rosado-claro: #f8c8dc;
+  --rosado-oscuro: #e09bb5;
+  --rosado-oscuro-2: #c77a97;
+  --blanco: #ffffff;
+  --gris-texto: #444444;
+  --sombra: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --radio: 14px;
+  --gap: 18px;
+  --fuente: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+
+/* reset ligero */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--fuente);
+  background: #fffafc;
+}
+
+/* contenedor principal */
+.reserva-completa-container {
+  max-width: 760px;
+  margin: 30px auto;
+  padding: 22px;
+  color: var(--gris-texto);
+}
+
+/* título general (si lo agregas fuera de pasos) */
+.reserva-completa-container > h1,
+.reserva-completa-container > .main-title {
+  text-align: center;
+  color: var(--rosado-oscuro);
+  font-size: 1.9rem;
+  margin-bottom: 18px;
+  font-weight: 800;
+}
+
+/* cada paso (card) */
+.quiz-step {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 20px;
+  box-shadow: var(--sombra);
+  margin-bottom: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s;
+}
+
+/* encabezados dentro de pasos */
+.quiz-step h2 {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+  color: var(--rosado-oscuro);
+  font-weight: 700;
+}
+
+/* contenedor de opciones (grid/row) */
+.opciones {
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* tarjeta de opción (imagen + texto) */
+.opciones .opcion {
+  width: 140px;
+  min-height: 140px;
+  background: var(--rosado-claro);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, background 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* imagen dentro de opción */
+.opciones .opcion img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 6px;
+}
+
+/* texto de la opción */
+.opciones .opcion p {
+  margin-top: auto;
+  font-weight: 700;
+  color: var(--gris-texto);
+  font-size: 0.95rem;
+}
+
+/* estado hover / foco */
+.opciones .opcion:hover,
+.opciones .opcion:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(224, 155, 181, 0.14);
+  border-color: var(--rosado-oscuro);
+}
+
+/* estado seleccionado (usa la clase 'selected' cuando quieras marcarlo) */
+.opciones .opcion.selected,
+.opciones .opcion.active {
+  background: linear-gradient(
+    180deg,
+    var(--rosado-oscuro),
+    var(--rosado-oscuro-2)
+  );
+  color: #fff;
+  border-color: var(--rosado-oscuro-2);
+}
+
+/* botones tipo opción (sin imagen) */
+.opciones button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--rosado-claro);
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.15s;
+  min-width: 120px;
+}
+
+.opciones button:hover {
+  transform: translateY(-4px);
+  border-color: var(--rosado-oscuro);
+}
+
+.opciones button.selected {
+  background: var(--rosado-oscuro);
+  color: #fff;
+}
+
+/* checkbox-list (múltiples selecciones) */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.checkbox-list label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: background 0.12s, transform 0.12s;
+}
+
+.checkbox-list label:hover {
+  transform: translateY(-3px);
+  background: #fff7fb;
+}
+
+/* inputs y selects */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+  font-size: 15px;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--rosado-oscuro);
+  box-shadow: 0 6px 18px rgba(224, 155, 181, 0.12);
+}
+
+/* estilos para el input file */
+.quiz-step input[type="file"] {
+  display: block;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+/* botones siguientes / continuar */
+.btn-next,
+button[type="submit"],
+.btn-reservar {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--rosado-oscuro);
+  color: #fff;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 12px;
+  transition: transform 0.12s, background 0.12s;
+}
+
+.btn-next:hover,
+button[type="submit"]:hover,
+.btn-reservar:hover {
+  transform: translateY(-3px);
+  background: var(--rosado-oscuro-2);
+}
+
+/* grid de horas (botones visuales si los usas) */
+.horas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.hora-btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.12s;
+}
+
+.hora-btn:hover {
+  transform: translateY(-4px);
+  border-color: var(--rosado-oscuro);
+  box-shadow: 0 8px 20px rgba(224, 155, 181, 0.08);
+}
+
+.hora-btn.selected {
+  background: var(--rosado-oscuro);
+  color: #fff;
+  border-color: var(--rosado-oscuro);
+}
+
+/* bloque de formulario del cliente (datos) */
+.formulario-cliente {
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 200, 220, 0.12),
+    rgba(240, 210, 220, 0.06)
+  );
+  border: 1px solid rgba(224, 155, 181, 0.08);
+}
+
+/* resumen final */
+.resumen-final {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.resumen-final p {
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+/* whatsapp button estilo secundario */
+.btn-wpp {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  background: #25d366;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* mensajes de ayuda / instrucciones */
+.small-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* pequeño ajuste para selects deshabilitados */
+select[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* responsivo */
+/* Tablets grandes y pantallas medianas (<= 900px) */
+@media (max-width: 900px) {
+  .reserva-completa-container {
+    padding: 18px;
+    max-width: 700px;
+  }
+
+  .opciones .opcion {
+    width: 130px;
+    min-height: 130px;
+  }
+
+  .quiz-step {
+    padding: 18px;
+  }
+}
+
+/* Tablets pequeñas (<= 720px) */
+@media (max-width: 720px) {
+  .reserva-completa-container {
+    padding: 16px;
+  }
+
+  .opciones {
+    gap: 12px;
+  }
+
+  .opciones .opcion {
+    width: 120px;
+    min-height: 120px;
+  }
+
+  .opciones .opcion img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .quiz-step h2 {
+    font-size: 1.05rem;
+  }
+
+  .checkbox-list label {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .horas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btn-next,
+  button[type="submit"],
+  .btn-reservar {
+    font-size: 0.95rem;
+    padding: 11px;
+  }
+}
+
+/* Teléfonos normales (<= 520px) */
+@media (max-width: 520px) {
+  .reserva-completa-container {
+    padding: 14px;
+  }
+
+  .quiz-step {
+    padding: 15px;
+  }
+
+  .opciones .opcion {
+    width: 110px;
+    min-height: 110px;
+  }
+
+  .opciones .opcion img {
+    width: 65px;
+    height: 65px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .btn-next,
+  .btn-reservar {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+}
+
+/* Teléfonos pequeños (<= 420px) */
+@media (max-width: 420px) {
+  .reserva-completa-container {
+    padding: 12px;
+  }
+
+  .opciones .opcion {
+    width: 100px;
+    min-height: 110px;
+    padding: 10px;
+  }
+
+  .opciones .opcion img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .quiz-step h2 {
+    font-size: 1rem;
+  }
+
+  .btn-next,
+  button[type="submit"],
+  .btn-reservar {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .horas-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+
+/* Teléfonos MUY pequeños (<= 360px) — iPhone SE / Android mini */
+@media (max-width: 360px) {
+  .reserva-completa-container {
+    padding: 10px;
+  }
+
+  .opciones .opcion {
+    width: 92px;
+    min-height: 100px;
+    padding: 8px;
+  }
+
+  .opciones .opcion img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .opciones .opcion p {
+    font-size: 0.85rem;
+  }
+
+  .quiz-step h2 {
+    font-size: 0.95rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+  .btn-next,
+  .btn-reservar {
+    padding: 9px;
+    font-size: 0.85rem;
+  }
+
+  .checkbox-list label {
+    padding: 8px;
+    font-size: 0.88rem;
+  }
+}

@@ -1,0 +1,257 @@
+import { useState, useEffect } from "react";
+import "./styles/Cursos.css";
+
+import RutinaReales from "../assets/PAGINA (2).png";
+
+export default function Cursos({ carrito, setCarrito }) {
+  // =============================
+  // ESTADOS
+  // =============================
+  const [open, setOpen] = useState({ personalizado: false });
+  const [showForm, setShowForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [cursoPersonalizado, setCursoPersonalizado] = useState(null);
+  const [cursoLlenoModal, setCursoLlenoModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
+    comentario: "",
+  });
+
+  // =============================
+  // CARGAR CURSO PERSONALIZADO
+  // =============================
+  useEffect(() => {
+    async function fetchCurso() {
+      try {
+        const res = await fetch("http://localhost:8080/api/cursos/1");
+        const data = await res.json();
+        setCursoPersonalizado(data);
+      } catch (error) {
+        console.error("Error cargando curso:", error);
+      }
+    }
+    fetchCurso();
+  }, []);
+
+  // =============================
+  // FORMULARIO
+  // =============================
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!cursoPersonalizado || cursoPersonalizado.cupoDisponible <= 0) {
+      setCursoLlenoModal(true);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await fetch("http://localhost:8080/api/inscripciones", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          curso: cursoPersonalizado.nombre,
+        }),
+      });
+
+      setCursoPersonalizado((prev) => ({
+        ...prev,
+        cupoDisponible: prev.cupoDisponible - 1,
+      }));
+
+      setShowSuccessModal(true);
+      setFormSubmitted(true);
+      setShowForm(false);
+
+      setFormData({
+        nombre: "",
+        email: "",
+        telefono: "",
+        comentario: "",
+      });
+    } catch (error) {
+      setCursoLlenoModal(true);
+    }
+
+    setLoading(false);
+  };
+
+  // =============================
+  // RENDER
+  // =============================
+  return (
+    <div className="cursos-container">
+      <h2>Cursos disponibles</h2>
+
+      <div className="cursos-grid">
+        {/* ================= MASTERCLASS PERSONALIZADA ================= */}
+        <div className="curso-card">
+          <video
+            src="/videos/MASTERCLASS.mp4"
+            controls
+            className="curso-video"
+            poster="https://placehold.co/400x250?text=Cargando+video"
+          />
+
+          <h3>{cursoPersonalizado?.nombre || "Masterclass personalizada"}</h3>
+
+          <p>
+            Aprende a conocer, entender y transformar tu cabello desde cero.
+          </p>
+
+          {cursoPersonalizado && (
+            <p className="curso-capacidad">
+              Cupos disponibles: {cursoPersonalizado.cupoDisponible}
+            </p>
+          )}
+
+          <button
+            className="btn-ver-mas"
+            onClick={() => setOpen({ personalizado: !open.personalizado })}
+          >
+            {open.personalizado ? "Ver menos" : "Ver más"}
+          </button>
+
+          {open.personalizado && (
+            <div className="curso-detalle">
+              <p>
+                Esta masterclass está diseñada para ayudarte a comprender tu
+                tipo de cabello y crear una rutina efectiva y personalizada.
+              </p>
+
+              <ul>
+                <li>Análisis de tu cabello</li>
+                <li>Rutina personalizada</li>
+                <li>Revisión de productos</li>
+                <li>Acompañamiento profesional</li>
+              </ul>
+
+              {!showForm && !formSubmitted && (
+                <button
+                  className="btn-inscribirse"
+                  onClick={() => setShowForm(true)}
+                  disabled={cursoPersonalizado?.cupoDisponible <= 0}
+                >
+                  {cursoPersonalizado?.cupoDisponible <= 0
+                    ? "Curso lleno"
+                    : "Inscribirse"}
+                </button>
+              )}
+
+              {showForm && (
+                <form className="inscripcion-form" onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Nombre completo"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Correo electrónico"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="tel"
+                    name="telefono"
+                    placeholder="Teléfono"
+                    value={formData.telefono}
+                    onChange={handleChange}
+                    required
+                  />
+                  <textarea
+                    name="comentario"
+                    placeholder="Comentario (opcional)"
+                    value={formData.comentario}
+                    onChange={handleChange}
+                  />
+                  <button type="submit">
+                    {loading ? "Enviando..." : "Enviar inscripción"}
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* ================= CURSO HOTMART ================= */}
+        <div className="curso-card">
+          <img
+            src={RutinaReales} // o la URL que quieras
+            alt="Curso online de cuidado capilar"
+            className="curso-video"
+          />
+
+          <h3>Curso de Cuidado y Definición para Rizos y Ondas</h3>
+
+          <p>
+            Un curso grabado paso a paso donde aprenderás a cuidar, entender y
+            transformar tu cabello desde casa, a tu ritmo.
+          </p>
+
+          <div className="curso-detalle">
+            <ul className="curso-lista">
+              <li>Clases 100% grabadas</li>
+              <li>Acceso inmediato</li>
+              <li>Disponible 24/7</li>
+              <li>Plataforma Hotmart</li>
+            </ul>
+          </div>
+
+          <a
+            href="https://go.hotmart.com/I103185148E?dp=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-inscribirse"
+          >
+            Ir al curso
+          </a>
+        </div>
+      </div>
+
+      {/* ================= MODAL CURSO LLENO ================= */}
+      {cursoLlenoModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setCursoLlenoModal(false)}
+        >
+          <div className="modal-curso-lleno">
+            <h2>Cupos agotados</h2>
+            <p>Este curso ya no tiene cupos disponibles.</p>
+            <button onClick={() => setCursoLlenoModal(false)}>Entendido</button>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL ÉXITO ================= */}
+      {showSuccessModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setShowSuccessModal(false)}
+        >
+          <div className="modal">
+            <h2>¡Inscripción enviada!</h2>
+            <p>Tu inscripción ha sido registrada correctamente.</p>
+            <button onClick={() => setShowSuccessModal(false)}>Cerrar</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

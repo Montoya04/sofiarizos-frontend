@@ -1,0 +1,81 @@
+.carrito-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.carrito-title {
+  font-size: 36px;
+  color: #c77a97;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+/* Tarjeta principal */
+.carrito-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 50px 30px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f8c8dc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Imagen bonita */
+.carrito-img {
+  width: 120px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.carrito-text {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* Botón elegante */
+.carrito-btn {
+  background: linear-gradient(135deg, #e09bb5, #c77a97);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(199, 122, 151, 0.4);
+}
+
+.carrito-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(199, 122, 151, 0.6);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

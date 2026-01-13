@@ -1,0 +1,70 @@
+.service-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Imagen */
+.service-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.service-card:hover .service-img {
+  transform: scale(1.05);
+}
+
+/* Texto */
+.service-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 8px;
+  font-family: "Poppins", hugolers free personal regula;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #000;
+  font-family: "Poppins", hugolers free personal regula;
+  line-height: 1.5;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .service-img {
+    height: 200px;
+  }
+
+  .service-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-img {
+    height: 180px;
+  }
+
+  .service-card {
+    padding: 14px;
+  }
+}
