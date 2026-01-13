@@ -28,7 +28,7 @@ export default function Cursos({ carrito, setCarrito }) {
   useEffect(() => {
     async function fetchCurso() {
       try {
-        const res = await fetch("http://localhost:8080/api/cursos/1");
+        const res = await fetch(`${API_URL}/api/cursos/1`);
         const data = await res.json();
         setCursoPersonalizado(data);
       } catch (error) {
@@ -56,7 +56,7 @@ export default function Cursos({ carrito, setCarrito }) {
     setLoading(true);
 
     try {
-      await fetch("http://localhost:8080/api/inscripciones", {
+      await fetch(`${API_URL}/api/inscripciones`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
