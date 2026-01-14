@@ -93,7 +93,7 @@ export default function ReservaCompleta() {
 
     try {
       const res = await fetch(
-        `${API_URL}/reservas/horas-ocupadas?fecha=${fechaStr}`
+        `${API_URL}/api/reservas/horas-ocupadas?fecha=${fechaStr}`
       );
 
       const ocupadas = res.ok ? await res.json() : [];
@@ -200,7 +200,7 @@ export default function ReservaCompleta() {
       formData.append("productos", JSON.stringify(respuestas.productos || []));
       (respuestas.fotos || []).forEach((f) => formData.append("fotos", f));
 
-      const res = await fetch(`${API_URL}/reservas`, {
+      const res = await fetch(`${API_URL}/api/reservas`, {
         method: "POST",
         body: formData,
       });
