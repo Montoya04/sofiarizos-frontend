@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import "./styles/Cursos.css";
-
 import RutinaReales from "../assets/PAGINA (2).png";
 
+const API_URL = import.meta.env.VITE_API_URL; // ✅ AQUÍ
+
 export default function Cursos({ carrito, setCarrito }) {
-  // =============================
-  // ESTADOS
-  // =============================
   const [open, setOpen] = useState({ personalizado: false });
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -23,12 +21,13 @@ export default function Cursos({ carrito, setCarrito }) {
   });
 
   // =============================
-  // CARGAR CURSO PERSONALIZADO
+  // CARGAR CURSO
   // =============================
   useEffect(() => {
     async function fetchCurso() {
       try {
         const res = await fetch(`${API_URL}/api/cursos/1`);
+        if (!res.ok) throw new Error("Error al cargar curso");
         const data = await res.json();
         setCursoPersonalizado(data);
       } catch (error) {
@@ -56,7 +55,7 @@ export default function Cursos({ carrito, setCarrito }) {
     setLoading(true);
 
     try {
-      await fetch(`${API_URL}/api/inscripciones`, {
+      const res = await fetch(`${API_URL}/api/inscripciones`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,6 +63,8 @@ export default function Cursos({ carrito, setCarrito }) {
           curso: cursoPersonalizado.nombre,
         }),
       });
+
+      if (!res.ok) throw new Error("Error enviando inscripción");
 
       setCursoPersonalizado((prev) => ({
         ...prev,
@@ -81,6 +82,7 @@ export default function Cursos({ carrito, setCarrito }) {
         comentario: "",
       });
     } catch (error) {
+      console.error(error);
       setCursoLlenoModal(true);
     }
 
