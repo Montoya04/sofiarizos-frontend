@@ -115,7 +115,7 @@ export default function ReservaCompleta() {
         if (periodo === "AM" && horas === 12) horas = 0;
         return `${horas.toString().padStart(2, "0")}:${minutos
           .toString()
-          .padStart(2, "0")}`;
+          .padStart(2, "0")}:00`;
       };
 
       const filtradas = baseHoras.filter((h) => {
@@ -190,7 +190,8 @@ export default function ReservaCompleta() {
         return `${hours.padStart(2, "0")}:${minutes}`;
       };
 
-      formData.append("hora", convertTo24H(respuestas.hora));
+      const hora24 = convertTo24H(respuestas.hora) + ":00";
+      formData.append("hora", hora24);
       formData.append("tipoCabello", respuestas.tipoCabello || "");
       formData.append("textura", respuestas.textura || "");
       formData.append("cueroCabelludo", respuestas.cueroCabelludo || "");
