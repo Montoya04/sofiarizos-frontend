@@ -1,14 +1,15 @@
 import "./styles/Carrito.css";
 
-export default function Carrito({ carrito }) {
-  // Número de WhatsApp de tu cliente (reemplaza con el real)
-  const whatsappNumber = "573195951926"; // <-- PON AQUÍ EL NÚMERO DE TU CLIENTE
+export default function Carrito({ carrito = [] }) {
+  // Número de WhatsApp
+  const whatsappNumber = "573195951926";
 
-  // Generar mensaje con los cursos del carrito
-  const mensaje = carrito.length
-    ? "Hola, quiero inscribirme en los siguientes cursos:\n" +
-      carrito.map((c, i) => `${i + 1}. ${c.nombre} (${c.tipo})`).join("\n")
-    : "";
+  // Mensaje para WhatsApp
+  const mensaje =
+    carrito.length > 0
+      ? "Hola, quiero inscribirme en los siguientes cursos:\n" +
+        carrito.map((c, i) => `${i + 1}. ${c.nombre}`).join("\n")
+      : "";
 
   return (
     <div className="carrito-container">
@@ -31,7 +32,7 @@ export default function Carrito({ carrito }) {
           <ul className="carrito-list">
             {carrito.map((c, i) => (
               <li key={i}>
-                <strong>{c.nombre}</strong> - {c.tipo}
+                <strong>{c.nombre}</strong>
               </li>
             ))}
           </ul>
