@@ -5,17 +5,21 @@ import "./styles/ReservaAdmin.css";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ReservaAdmin() {
+  const navigate = useNavigate(); // 👈 SIEMPRE ARRIBA
+
   const [activeTab, setActiveTab] = useState("reservas");
+  const [logoutMsg, setLogoutMsg] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    if (!token) {
-      navigate("/admin/login", { replace: true });
-    }
-  }, []);
-
-  const authHeaders = {
+  const authHeaders = () => ({
     Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+  });
+
+  const cerrarSesion = () => {
+    setLogoutMsg(true);
+    localStorage.removeItem("adminToken");
+    setTimeout(() => {
+      navigate("/admin/login", { replace: true });
+    }, 1500);
   };
 
   useEffect(() => {
@@ -24,23 +28,6 @@ export default function ReservaAdmin() {
       window.history.pushState(null, "", window.location.href);
     };
   }, []);
-
-  // ---------------- CERRAR SESIÓN ----------------
-  const cerrarSesion = () => {
-    // 1️⃣ Mostrar mensaje
-    setLogoutMsg(true);
-
-    // 2️⃣ Limpiar todo lo sensible
-    localStorage.removeItem("adminToken");
-
-    // 3️⃣ Redirigir con reemplazo (no vuelve atrás)
-    setTimeout(() => {
-      navigate("/admin/login", { replace: true });
-    }, 1500);
-  };
-
-  const navigate = useNavigate();
-  const [logoutMsg, setLogoutMsg] = useState(false);
 
   // ---------------- MODALES ----------------
   const [modalExito, setModalExito] = useState(false);
@@ -61,9 +48,6 @@ export default function ReservaAdmin() {
   const [cursos, setCursos] = useState([]);
 
   // ---------------- Cerrar Sesión ----------------
-
-  const [cerrandoSesion, setCerrandoSesion] = useState(false);
-  const [logoutOk, setLogoutOk] = useState(false);
 
   // ---------------- MODALES ----------------
   const abrirModalEliminar = (id) => {
@@ -346,16 +330,6 @@ export default function ReservaAdmin() {
             <button className="next" onClick={siguienteFoto}>
               ⟶
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* CERRANDO SESIÓN */}
-      {cerrandoSesion && (
-        <div className="modal-success-overlay">
-          <div className="modal-success">
-            <div className="icon">🔒</div>
-            <p>Cerrando sesión...</p>
           </div>
         </div>
       )}
