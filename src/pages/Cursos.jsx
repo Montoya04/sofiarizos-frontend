@@ -66,6 +66,16 @@ export default function Cursos({ carrito, setCarrito }) {
 
       if (!res.ok) throw new Error("Error enviando inscripción");
 
+      // 👉 AQUÍ PEGAS ESTO
+      setCarrito((prev) => [
+        ...prev,
+        {
+          id: cursoPersonalizado.id,
+          nombre: cursoPersonalizado.nombre,
+          tipo: "Masterclass personalizada",
+        },
+      ]);
+
       setCursoPersonalizado((prev) => ({
         ...prev,
         cupoDisponible: prev.cupoDisponible - 1,
