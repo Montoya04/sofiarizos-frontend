@@ -234,6 +234,27 @@
   background: #b95772;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* fondo oscuro real */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* MUY IMPORTANTE */
+}
+
+.modal-curso-lleno,
+.modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
