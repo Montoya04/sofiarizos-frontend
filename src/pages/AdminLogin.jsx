@@ -27,11 +27,16 @@ export default function AdminLogin() {
       }
 
       const data = await res.json();
-      localStorage.setItem("adminToken", data.token);
-      localStorage.setItem("adminLoginTime", Date.now());
-      navigate("/admin", { replace: true });
 
-      navigate("/admin");
+      if (!data.token) {
+        setError("Error de autenticación");
+        return;
+      }
+
+      localStorage.setItem("adminToken", data.token);
+      localStorage.setItem("adminLoginTime", Date.now().toString());
+
+      navigate("/admin", { replace: true });
     } catch {
       setError("Error de conexión con el servidor");
     }

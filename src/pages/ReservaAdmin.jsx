@@ -8,6 +8,17 @@ export default function ReservaAdmin() {
   const [activeTab, setActiveTab] = useState("reservas");
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      navigate("/admin/login", { replace: true });
+    }
+  }, []);
+
+  const authHeaders = {
+    Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+  };
+
+  useEffect(() => {
     window.history.pushState(null, "", window.location.href);
     window.onpopstate = () => {
       window.history.pushState(null, "", window.location.href);
@@ -90,7 +101,10 @@ export default function ReservaAdmin() {
   // ---------------- FETCH RESERVAS ----------------
   const cargarReservas = async () => {
     try {
-      const res = await fetch(`${API_URL}/reservas`);
+      const res = await fetch(`${API_URL}/reservas`, {
+        headers: authHeaders,
+      });
+
       const data = await res.json();
       const parseada = data.map((r) => ({
         ...r,
@@ -108,7 +122,10 @@ export default function ReservaAdmin() {
   // ---------------- FETCH CURSOS ----------------
   const cargarCursos = async () => {
     try {
-      const res = await fetch(`${API_URL}/cursos`);
+      const res = await fetch(`${API_URL}/cursos`, {
+        headers: authHeaders,
+      });
+
       const data = await res.json();
       setCursos(data);
     } catch (e) {
@@ -122,7 +139,9 @@ export default function ReservaAdmin() {
     try {
       await fetch(`${API_URL}/reservas/${reservaAEliminar}`, {
         method: "DELETE",
+        headers: authHeaders,
       });
+
       setReservas((prev) => prev.filter((r) => r.id !== reservaAEliminar));
       setMensajeExito("Reserva eliminada correctamente");
       setModalExito(true);
@@ -135,9 +154,14 @@ export default function ReservaAdmin() {
 
   const confirmarReinicio = async () => {
     try {
-      await fetch(`${API_URL}/cursos/${cursoAReiniciar}/reiniciar`, {
-        method: "PUT",
-      });
+      await fetch(
+        `${API_URL}/cursos/${cursoAReiniciar}/ajustar-cupo?cupoMaximo=10`,
+        {
+          method: "PUT",
+          headers: authHeaders,
+        }
+      );
+
       cargarCursos();
       setMensajeExito("Cupos reiniciados correctamente");
       setModalExito(true);
@@ -185,7 +209,7 @@ export default function ReservaAdmin() {
         </button>
       </div>
 
-      {/* RESERVAS */}
+      {/* ================= RESERVAS ================= */}
       {activeTab === "reservas" && (
         <div>
           {reservas.map((r) => (
@@ -198,6 +222,7 @@ export default function ReservaAdmin() {
               <p>Tipo de cabello: {r.tipoCabello || "-"}</p>
               <p>Textura: {r.textura || "-"}</p>
               <p>Cuero cabelludo: {r.cueroCabelludo || "-"}</p>
+
               <p>
                 Rutina:{" "}
                 {Array.isArray(r.rutinaLista) && r.rutinaLista.length > 0
@@ -211,15 +236,18 @@ export default function ReservaAdmin() {
                   ? r.productosLista.join(", ")
                   : "-"}
               </p>
+
               <p>Objetivo: {r.objetivo || "-"}</p>
+
               <div className="fotos-container">
-                {r.fotosLista && r.fotosLista.length > 0 ? (
+                {r.fotosLista?.length > 0 ? (
                   r.fotosLista.map((f, i) => (
                     <img
                       key={i}
                       src={f}
                       alt="Foto reserva"
                       className="foto-reserva"
+                      onClick={() => abrirModalFotos(r.fotosLista, i)}
                     />
                   ))
                 ) : (
@@ -238,7 +266,7 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* CURSOS */}
+      {/* ================= CURSOS ================= */}
       {activeTab === "cursos" && (
         <div>
           {cursos.map((c) => (
@@ -257,7 +285,9 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* MODALES */}
+      {/* ================= MODALES ================= */}
+
+      {/* ÉXITO */}
       {modalExito && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -268,6 +298,7 @@ export default function ReservaAdmin() {
         </div>
       )}
 
+      {/* ELIMINAR */}
       {modalEliminar && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -284,6 +315,7 @@ export default function ReservaAdmin() {
         </div>
       )}
 
+      {/* CONFIRMAR REINICIO */}
       {modalConfirm && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -300,6 +332,7 @@ export default function ReservaAdmin() {
         </div>
       )}
 
+      {/* VISOR DE FOTOS */}
       {modalFotos && (
         <div className="modal-fotos" onClick={cerrarModalFotos}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -316,28 +349,26 @@ export default function ReservaAdmin() {
           </div>
         </div>
       )}
+
+      {/* CERRANDO SESIÓN */}
+      {cerrandoSesion && (
+        <div className="modal-success-overlay">
+          <div className="modal-success">
+            <div className="icon">🔒</div>
+            <p>Cerrando sesión...</p>
+          </div>
+        </div>
+      )}
+
+      {/* LOGOUT OK */}
+      {logoutMsg && (
+        <div className="modal-success-overlay">
+          <div className="modal-success">
+            <div className="icon">✔</div>
+            <p>Sesión cerrada correctamente</p>
+          </div>
+        </div>
+      )}
     </div>
   );
-
-  {
-    cerrandoSesion && (
-      <div className="modal-success-overlay">
-        <div className="modal-success">
-          <div className="icon">🔒</div>
-          <p>Cerrando sesión...</p>
-        </div>
-      </div>
-    );
-  }
-
-  {
-    logoutMsg && (
-      <div className="modal-success-overlay">
-        <div className="modal-success">
-          <div className="icon">✔</div>
-          <p>Sesión cerrada correctamente</p>
-        </div>
-      </div>
-    );
-  }
 }
