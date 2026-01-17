@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../pages/styles/AdminLogin.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://sofiarizos-backend-production.up.railway.app";
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -17,8 +17,13 @@ export default function AdminLogin() {
     try {
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: username, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
       });
 
       if (!res.ok) {
@@ -28,16 +33,20 @@ export default function AdminLogin() {
 
       const data = await res.json();
 
+      console.log("✅ RESPUESTA LOGIN:", data);
+
       if (!data.token) {
         setError("Error de autenticación");
         return;
       }
 
+      // 🔐 GUARDAR TOKEN
       localStorage.setItem("adminToken", data.token);
-      localStorage.setItem("adminLoginTime", Date.now().toString());
 
+      // 👉 REDIRECCIÓN
       navigate("/admin", { replace: true });
-    } catch {
+    } catch (err) {
+      console.error(err);
       setError("Error de conexión con el servidor");
     }
   };
@@ -51,10 +60,10 @@ export default function AdminLogin() {
         {error && <div className="error">{error}</div>}
 
         <input
-          type="text"
-          placeholder="Usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
