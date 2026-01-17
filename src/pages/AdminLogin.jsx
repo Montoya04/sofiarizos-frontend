@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../pages/styles/AdminLogin.css";
 
+// ✅ BACKEND RAILWAY
 const API_URL = "https://sofiarizos-backend-production.up.railway.app";
 
 export default function AdminLogin() {
@@ -21,33 +22,34 @@ export default function AdminLogin() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email,
+          password,
         }),
       });
 
+      // 🔴 ERROR DE LOGIN
       if (!res.ok) {
         setError("Usuario o contraseña incorrectos");
         return;
       }
 
       const data = await res.json();
+      console.log("✅ LOGIN OK:", data);
 
-      console.log("✅ RESPUESTA LOGIN:", data);
-
+      // 🔴 SEGURIDAD EXTRA
       if (!data.token) {
-        setError("Error de autenticación");
+        setError("Respuesta inválida del servidor");
         return;
       }
 
       // 🔐 GUARDAR TOKEN
       localStorage.setItem("adminToken", data.token);
 
-      // 👉 REDIRECCIÓN
+      // 👉 IR AL PANEL
       navigate("/admin", { replace: true });
     } catch (err) {
-      console.error(err);
-      setError("Error de conexión con el servidor");
+      console.error("❌ ERROR LOGIN:", err);
+      setError("No se pudo conectar con el servidor");
     }
   };
 
