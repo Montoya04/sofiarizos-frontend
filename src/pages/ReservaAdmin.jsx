@@ -18,7 +18,7 @@ export default function ReservaAdmin() {
     setLogoutMsg(true);
     localStorage.removeItem("adminToken");
     setTimeout(() => {
-      navigate("/admin/login", { replace: true });
+      navigate("/admin-login", { replace: true });
     }, 1500);
   };
 
