@@ -86,17 +86,13 @@ export default function ReservaAdmin() {
   const cargarReservas = async () => {
     try {
       const res = await fetch(`${API_URL}/reservas`, {
-        headers: authHeaders(), // ✅ FIX
+        headers: authHeaders(),
       });
 
+      if (!res.ok) throw new Error("Error cargando reservas");
+
       const data = await res.json();
-      const parseada = data.map((r) => ({
-        ...r,
-        fotos: r.fotosLista || [],
-        rutinaLista: r.rutinaLista || [],
-        productosLista: r.productosLista || [],
-      }));
-      setReservas(parseada);
+      setReservas(data);
     } catch (e) {
       setMensajeExito("Error cargando reservas");
       setModalExito(true);
@@ -107,8 +103,10 @@ export default function ReservaAdmin() {
   const cargarCursos = async () => {
     try {
       const res = await fetch(`${API_URL}/cursos`, {
-        headers: authHeaders(), // ✅ FIX
+        headers: authHeaders(),
       });
+
+      if (!res.ok) throw new Error("Error cargando cursos");
 
       const data = await res.json();
       setCursos(data);
