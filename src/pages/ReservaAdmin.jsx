@@ -47,13 +47,12 @@ export default function ReservaAdmin() {
   const [reservas, setReservas] = useState([]);
   const [cursos, setCursos] = useState([]);
 
-  // ---------------- Cerrar Sesión ----------------
-
   // ---------------- MODALES ----------------
   const abrirModalEliminar = (id) => {
     setReservaAEliminar(id);
     setModalEliminar(true);
   };
+
   const cerrarModalEliminar = () => {
     setReservaAEliminar(null);
     setModalEliminar(false);
@@ -63,6 +62,7 @@ export default function ReservaAdmin() {
     setCursoAReiniciar(id);
     setModalConfirm(true);
   };
+
   const cerrarModalConfirm = () => {
     setCursoAReiniciar(null);
     setModalConfirm(false);
@@ -86,7 +86,7 @@ export default function ReservaAdmin() {
   const cargarReservas = async () => {
     try {
       const res = await fetch(`${API_URL}/reservas`, {
-        headers: authHeaders,
+        headers: authHeaders(), // ✅ FIX
       });
 
       const data = await res.json();
@@ -107,7 +107,7 @@ export default function ReservaAdmin() {
   const cargarCursos = async () => {
     try {
       const res = await fetch(`${API_URL}/cursos`, {
-        headers: authHeaders,
+        headers: authHeaders(), // ✅ FIX
       });
 
       const data = await res.json();
@@ -123,7 +123,7 @@ export default function ReservaAdmin() {
     try {
       await fetch(`${API_URL}/reservas/${reservaAEliminar}`, {
         method: "DELETE",
-        headers: authHeaders,
+        headers: authHeaders(), // ✅ FIX
       });
 
       setReservas((prev) => prev.filter((r) => r.id !== reservaAEliminar));
@@ -142,7 +142,7 @@ export default function ReservaAdmin() {
         `${API_URL}/cursos/${cursoAReiniciar}/ajustar-cupo?cupoMaximo=10`,
         {
           method: "PUT",
-          headers: authHeaders,
+          headers: authHeaders(), // ✅ FIX
         }
       );
 
@@ -270,8 +270,6 @@ export default function ReservaAdmin() {
       )}
 
       {/* ================= MODALES ================= */}
-
-      {/* ÉXITO */}
       {modalExito && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -282,7 +280,6 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* ELIMINAR */}
       {modalEliminar && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -299,7 +296,6 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* CONFIRMAR REINICIO */}
       {modalConfirm && (
         <div className="modal-success-overlay">
           <div className="modal-success">
@@ -316,7 +312,6 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* VISOR DE FOTOS */}
       {modalFotos && (
         <div className="modal-fotos" onClick={cerrarModalFotos}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -334,7 +329,6 @@ export default function ReservaAdmin() {
         </div>
       )}
 
-      {/* LOGOUT OK */}
       {logoutMsg && (
         <div className="modal-success-overlay">
           <div className="modal-success">
