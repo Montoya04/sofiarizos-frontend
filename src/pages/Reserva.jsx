@@ -225,7 +225,7 @@ export default function ReservaCompleta() {
         return;
       }
 
-      await res.json().catch(() => ({ message: "OK" }));
+      await res.text();
 
       Swal.fire({
         title: "¡Reserva creada con éxito!",
