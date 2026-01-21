@@ -7,7 +7,8 @@ import Ondulado from "../assets/CABELLOS 2_Mesa de trabajo 1.png";
 import Rizado from "../assets/CABELLOS-02.png";
 import Afro from "../assets/CABELLOS 4-03.png";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://sofiarizos-backend-production.up.railway.app/api";
+
 const MAX_FILES = 2;
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
