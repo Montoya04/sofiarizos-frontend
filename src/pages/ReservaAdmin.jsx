@@ -18,7 +18,7 @@ export default function ReservaAdmin() {
     setLogoutMsg(true);
     localStorage.removeItem("adminToken");
     setTimeout(() => {
-      navigate("/admin-login", { replace: true });
+      navigate("/admin/login", { replace: true });
     }, 1500);
   };
 
@@ -85,7 +85,7 @@ export default function ReservaAdmin() {
   // ---------------- FETCH RESERVAS ----------------
   const cargarReservas = async () => {
     try {
-      const res = await fetch(`${API_URL}/reservas`, {
+      const res = await fetch(`${API_URL}/api/reservas`, {
         headers: authHeaders(),
       });
 
@@ -102,7 +102,7 @@ export default function ReservaAdmin() {
   // ---------------- FETCH CURSOS ----------------
   const cargarCursos = async () => {
     try {
-      const res = await fetch(`${API_URL}/cursos`, {
+      const res = await fetch(`${API_URL}/api/cursos`, {
         headers: authHeaders(),
       });
 
@@ -119,7 +119,7 @@ export default function ReservaAdmin() {
   // ---------------- ACCIONES ----------------
   const eliminarReserva = async () => {
     try {
-      await fetch(`${API_URL}/reservas/${reservaAEliminar}`, {
+      await fetch(`${API_URL}/api/reservas/${reservaAEliminar}`, {
         method: "DELETE",
         headers: authHeaders(), // ✅ FIX
       });
@@ -137,7 +137,7 @@ export default function ReservaAdmin() {
   const confirmarReinicio = async () => {
     try {
       await fetch(
-        `${API_URL}/cursos/${cursoAReiniciar}/ajustar-cupo?cupoMaximo=10`,
+        `${API_URL}/api/cursos/${cursoAReiniciar}/ajustar-cupo?cupoMaximo=10`,
         {
           method: "PUT",
           headers: authHeaders(), // ✅ FIX
