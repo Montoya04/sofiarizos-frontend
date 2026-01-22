@@ -136,13 +136,10 @@ export default function ReservaAdmin() {
 
   const confirmarReinicio = async () => {
     try {
-      await fetch(
-        `${API_URL}/api/cursos/${cursoAReiniciar}/ajustar-cupo?cupoMaximo=10`,
-        {
-          method: "PUT",
-          headers: authHeaders(), // ✅ FIX
-        }
-      );
+      await fetch(`${API_URL}/api/cursos/${cursoAReiniciar}/reiniciar`, {
+        method: "PUT",
+        headers: authHeaders(), // ✅ FIX
+      });
 
       cargarCursos();
       setMensajeExito("Cupos reiniciados correctamente");
