@@ -26,7 +26,7 @@ export default function Cursos({ carrito, setCarrito }) {
   useEffect(() => {
     async function fetchCurso() {
       try {
-        const res = await fetch(`${API_URL}/cursos/1`);
+        const res = await fetch(`${API_URL}/api/cursos/1`);
         if (!res.ok) throw new Error("Error al cargar curso");
         const data = await res.json();
         setCursoPersonalizado(data);
