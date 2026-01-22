@@ -55,14 +55,16 @@ export default function Cursos({ carrito, setCarrito }) {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/inscripciones`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          curso: cursoPersonalizado.nombre,
-        }),
-      });
+      const res = await fetch(
+        `${API_URL}/api/cursos/${cursoPersonalizado.id}/inscribirse`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre: formData.nombre,
+          }),
+        }
+      );
 
       if (!res.ok) throw new Error("Error enviando inscripción");
 
