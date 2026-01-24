@@ -47,11 +47,6 @@ export default function Cursos({ carrito, setCarrito }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!cursoPersonalizado || cursoPersonalizado.cupoDisponible <= 0) {
-      setCursoLlenoModal(true);
-      return;
-    }
-
     setLoading(true);
 
     try {
@@ -66,7 +61,13 @@ export default function Cursos({ carrito, setCarrito }) {
         }
       );
 
-      if (!res.ok) throw new Error("Error enviando inscripción");
+      if (!res.ok) {
+        if (res.status === 400 || res.status === 409) {
+          setCursoLlenoModal(true);
+          return;
+        }
+        throw new Error("Error enviando inscripción");
+      }
 
       // 👉 AQUÍ PEGAS ESTO
       setCarrito((prev) => [
@@ -195,7 +196,7 @@ export default function Cursos({ carrito, setCarrito }) {
                     value={formData.comentario}
                     onChange={handleChange}
                   />
-                  <button type="submit">
+                  <button type="submit" disabled={loading}>
                     {loading ? "Enviando..." : "Enviar inscripción"}
                   </button>
                 </form>
