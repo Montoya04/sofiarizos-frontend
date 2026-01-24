@@ -163,16 +163,25 @@ export default function ReservaAdmin() {
 
   // ---------------- Mostrar Inscritos--------------
 
+  // ---------------- Mostrar Inscritos--------------
   const [inscripciones, setInscripciones] = useState([]);
 
   const cargarInscripciones = async () => {
     const res = await fetch(`${API_URL}/api/inscripciones`, {
       headers: authHeaders(),
     });
+
+    if (!res.ok) throw new Error("Error cargando inscripciones");
+
     const data = await res.json();
     setInscripciones(data);
   };
-  cargarInscripciones();
+
+  useEffect(() => {
+    if (activeTab === "inscripciones") {
+      cargarInscripciones();
+    }
+  }, [activeTab]);
 
   // ---------------- RENDER ----------------
   return (
