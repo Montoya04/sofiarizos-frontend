@@ -59,8 +59,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nombre: formData.nombre,
-          cursoId: cursoPersonalizado.id,
+          nombre: nombreUsuario,
+          cursoId: curso.id,
         }),
       });
 
