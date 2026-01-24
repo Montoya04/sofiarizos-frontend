@@ -47,6 +47,9 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ PROTECCIÓN CLAVE
+    if (!cursoPersonalizado) return;
+
     setLoading(true);
 
     try {
@@ -106,8 +109,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   setCarrito((prev) => [
     ...prev,
     {
-      id: cursoPersonalizado.id,
-      nombre: cursoPersonalizado.nombre,
+      id: cursoPersonalizado?.id,
+      nombre: cursoPersonalizado?.nombre,
       tipo: "Masterclass personalizada",
     },
   ]);
@@ -168,9 +171,14 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
                 <button
                   className="btn-inscribirse"
                   onClick={() => setShowForm(true)}
-                  disabled={cursoPersonalizado?.cupoDisponible <= 0}
+                  disabled={
+                    !cursoPersonalizado ||
+                    cursoPersonalizado.cupoDisponible <= 0
+                  }
                 >
-                  {cursoPersonalizado?.cupoDisponible <= 0
+                  {!cursoPersonalizado
+                    ? "Cargando..."
+                    : cursoPersonalizado.cupoDisponible <= 0
                     ? "Curso lleno"
                     : "Inscribirse"}
                 </button>
