@@ -151,6 +151,22 @@ export default function ReservaAdmin() {
     cerrarModalConfirm();
   };
 
+  const eliminarInscripcion = async (id) => {
+    try {
+      await fetch(`${API_URL}/api/inscripciones/${id}`, {
+        method: "DELETE",
+        headers: authHeaders(),
+      });
+
+      setInscripciones((prev) => prev.filter((i) => i.id !== id));
+      setMensajeExito("Inscripción eliminada correctamente");
+      setModalExito(true);
+    } catch {
+      setMensajeExito("Error eliminando inscripción");
+      setModalExito(true);
+    }
+  };
+
   // ---------------- USE EFFECT ----------------
   const fetchRef = useRef(false);
   useEffect(() => {
@@ -285,6 +301,13 @@ export default function ReservaAdmin() {
               <p>Curso: {i.curso}</p>
               <p>Fecha: {i.fechaRegistro}</p>
               <p>Comentario: {i.comentario || "-"}</p>
+
+              <button
+                className="btn-eliminar"
+                onClick={() => eliminarInscripcion(i.id)}
+              >
+                Eliminar inscripción
+              </button>
             </div>
           ))}
         </div>
