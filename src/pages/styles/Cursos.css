@@ -168,7 +168,7 @@
 /* CLICK */
 .btn-inscribirse:active {
   transform: scale(0.97);
-  box-shadow: 0 6px 14px rgba(155, 79, 108, 0.4);
+  box-shadow: 0 6px 14px rgba(122, 65, 79, 0.4);
 }
 
 /* ============================= */

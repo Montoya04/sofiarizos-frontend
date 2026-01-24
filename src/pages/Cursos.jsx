@@ -213,7 +213,7 @@ export default function Cursos({ carrito, setCarrito }) {
             className="curso-video"
           />
 
-          <h3>Curso de Cuidado y Definición para Rizos y Ondas</h3>
+          <h3>Rutinas reales para Rizos reales</h3>
 
           <p>
             Un curso grabado paso a paso donde aprenderás a cuidar, entender y
