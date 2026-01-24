@@ -59,8 +59,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nombre: nombreUsuario,
-          cursoId: curso.id,
+          nombre: formData.nombre, // ✅ AQUÍ
+          cursoId: cursoPersonalizado.id, // ✅ AQUÍ
         }),
       });
 
@@ -81,7 +81,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           tipo: "Masterclass personalizada",
         },
       ]);
-      setNuevoItem(true); // 🔔 activa aviso en header
+      setNuevoItem && setNuevoItem(true);
+      // 🔔 activa aviso en header
 
       setCursoPersonalizado((prev) => ({
         ...prev,
