@@ -81,6 +81,7 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           tipo: "Masterclass personalizada",
         },
       ]);
+      setNuevoItem(true); // 🔔 activa aviso en header
 
       setCursoPersonalizado((prev) => ({
         ...prev,
@@ -106,16 +107,6 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   };
 
   // ---------- Carrito ---------------
-  setCarrito((prev) => [
-    ...prev,
-    {
-      id: cursoPersonalizado?.id,
-      nombre: cursoPersonalizado?.nombre,
-      tipo: "Masterclass personalizada",
-    },
-  ]);
-
-  setNuevoItem(true); // 🔴 ACTIVA AVISO
 
   // =============================
   // RENDER

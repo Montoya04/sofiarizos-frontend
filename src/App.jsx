@@ -13,20 +13,39 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminGuard from "./components/AdminGuard";
 
 export default function App() {
-  const [carrito, setCarrito] = useState([]); // ✅ AQUÍ ESTÁ LA CLAVE
+  // 🛒 Carrito global
+  const [carrito, setCarrito] = useState([]);
+
+  // 🔔 Aviso visual tipo WhatsApp
+  const [nuevoItem, setNuevoItem] = useState(false);
 
   return (
     <BrowserRouter>
-      <Header />
+      {/* HEADER */}
+      <Header
+        carrito={carrito}
+        nuevoItem={nuevoItem}
+        setNuevoItem={setNuevoItem}
+      />
+
       <Routes>
         <Route path="/" element={<Servicios />} />
 
         <Route
           path="/cursos"
-          element={<Cursos carrito={carrito} setCarrito={setCarrito} />}
+          element={
+            <Cursos
+              carrito={carrito}
+              setCarrito={setCarrito}
+              setNuevoItem={setNuevoItem}
+            />
+          }
         />
 
-        <Route path="/carrito" element={<Carrito carrito={carrito} />} />
+        <Route
+          path="/carrito"
+          element={<Carrito carrito={carrito} setNuevoItem={setNuevoItem} />}
+        />
 
         <Route path="/reserva" element={<Reserva />} />
 
@@ -43,6 +62,7 @@ export default function App() {
           }
         />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );
