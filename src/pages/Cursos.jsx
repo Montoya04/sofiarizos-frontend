@@ -4,7 +4,7 @@ import RutinaReales from "../assets/PAGINA (2).png";
 
 const API_URL = import.meta.env.VITE_API_URL; // ✅ AQUÍ
 
-export default function Cursos({ carrito, setCarrito }) {
+export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   const [open, setOpen] = useState({ personalizado: false });
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -101,6 +101,18 @@ export default function Cursos({ carrito, setCarrito }) {
 
     setLoading(false);
   };
+
+  // ---------- Carrito ---------------
+  setCarrito((prev) => [
+    ...prev,
+    {
+      id: cursoPersonalizado.id,
+      nombre: cursoPersonalizado.nombre,
+      tipo: "Masterclass personalizada",
+    },
+  ]);
+
+  setNuevoItem(true); // 🔴 ACTIVA AVISO
 
   // =============================
   // RENDER
