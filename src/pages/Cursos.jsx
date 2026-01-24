@@ -53,16 +53,16 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `${API_URL}/api/cursos/${cursoPersonalizado.id}/inscribirse`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            nombre: formData.nombre,
-          }),
-        }
-      );
+      const res = await fetch(`${API_URL}/api/inscripciones`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          cursoId: cursoPersonalizado.id,
+        }),
+      });
 
       if (!res.ok) {
         if (res.status === 400 || res.status === 409) {
