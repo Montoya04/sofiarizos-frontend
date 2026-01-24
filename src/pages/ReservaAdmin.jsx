@@ -161,6 +161,19 @@ export default function ReservaAdmin() {
     }
   }, []);
 
+  // ---------------- Mostrar Inscritos--------------
+
+  const [inscripciones, setInscripciones] = useState([]);
+
+  const cargarInscripciones = async () => {
+    const res = await fetch(`${API_URL}/api/inscripciones`, {
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    setInscripciones(data);
+  };
+  cargarInscripciones();
+
   // ---------------- RENDER ----------------
   return (
     <div className="admin-panel-container">
@@ -185,6 +198,13 @@ export default function ReservaAdmin() {
           onClick={() => setActiveTab("cursos")}
         >
           Cursos
+        </button>
+
+        <button
+          className={activeTab === "inscripciones" ? "active" : ""}
+          onClick={() => setActiveTab("inscripciones")}
+        >
+          Inscripciones
         </button>
       </div>
 
@@ -240,6 +260,22 @@ export default function ReservaAdmin() {
               >
                 Eliminar reserva
               </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ================= Inscripciones ================= */}
+      {activeTab === "inscripciones" && (
+        <div>
+          {inscripciones.map((i) => (
+            <div key={i.id} className="reserva-card">
+              <h3>{i.nombre}</h3>
+              <p>Email: {i.email}</p>
+              <p>Teléfono: {i.telefono}</p>
+              <p>Curso: {i.curso}</p>
+              <p>Fecha: {i.fechaRegistro}</p>
+              <p>Comentario: {i.comentario || "-"}</p>
             </div>
           ))}
         </div>

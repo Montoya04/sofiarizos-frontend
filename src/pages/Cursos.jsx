@@ -262,7 +262,10 @@ export default function Cursos({ carrito, setCarrito }) {
         >
           <div className="modal">
             <h2>¡Inscripción enviada!</h2>
-            <p>Tu inscripción ha sido registrada correctamente.</p>
+            <p>
+              Tu inscripción ha sido registrada correctamente. Por favor
+              confirma tu carrito para confirmar tu inscripción.
+            </p>
             <button onClick={() => setShowSuccessModal(false)}>Cerrar</button>
           </div>
         </div>
