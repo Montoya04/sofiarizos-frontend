@@ -1,10 +1,9 @@
 import "./styles/Carrito.css";
+import { Link } from "react-router-dom";
 
 export default function Carrito({ carrito = [] }) {
-  // Número de WhatsApp
   const whatsappNumber = "573195951926";
 
-  // Mensaje para WhatsApp
   const mensaje =
     carrito.length > 0
       ? "Hola, quiero inscribirme en los siguientes cursos:\n" +
@@ -23,9 +22,9 @@ export default function Carrito({ carrito = [] }) {
             className="carrito-img"
           />
           <p className="carrito-text">Aún no has agregado productos.</p>
-          <a href="/cursos" className="carrito-btn">
+          <Link to="/cursos" className="carrito-btn">
             Ver Cursos
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="carrito-card">
