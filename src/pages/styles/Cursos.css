@@ -259,6 +259,29 @@
   animation: modalFadeIn 0.35s ease-out;
 }
 
+/* Precios del curso*/
+
+.curso-precios {
+  margin: 15px 0;
+  padding: 12px;
+  background: #faf6f8;
+  border-radius: 10px;
+}
+
+.curso-precios h4 {
+  margin-bottom: 8px;
+}
+
+.curso-precios ul {
+  list-style: none;
+  padding: 0;
+}
+
+.curso-precios li {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
 /* ✨ Animación suave */
 @keyframes modalFadeIn {
   from {

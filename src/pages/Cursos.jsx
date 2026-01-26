@@ -167,6 +167,21 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
                 <li>Acompañamiento profesional</li>
               </ul>
 
+              <div className="curso-precios">
+                <h4>Precios</h4>
+                <ul>
+                  <li>
+                    Cabello corto: <strong>$100.000</strong>
+                  </li>
+                  <li>
+                    Cabello medio: <strong>$110.000</strong>
+                  </li>
+                  <li>
+                    Cabello largo: <strong>$120.000</strong>
+                  </li>
+                </ul>
+              </div>
+
               {!showForm && !formSubmitted && (
                 <button
                   className="btn-inscribirse"
