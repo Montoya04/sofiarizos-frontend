@@ -514,6 +514,55 @@ export default function ReservaCompleta() {
       {paso === 9 && (
         <div className="quiz-step">
           <h2>9. Selecciona tu cita</h2>
+          <div className="reserva-precios">
+            <h3>Precios de los servicios</h3>
+
+            <div className="precio-bloque">
+              <h4>Definición de rizos</h4>
+              <ul>
+                <li>
+                  Cabello corto: <strong>$50.000</strong>
+                </li>
+                <li>
+                  Cabello medio: <strong>$60.000</strong>
+                </li>
+                <li>
+                  Cabello largo: <strong>$70.000</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div className="precio-bloque">
+              <h4>Corte + definición</h4>
+              <ul>
+                <li>
+                  Cabello corto: <strong>$65.000</strong>
+                </li>
+                <li>
+                  Cabello medio: <strong>$75.000</strong>
+                </li>
+                <li>
+                  Cabello largo: <strong>$85.000</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div className="precio-bloque">
+              <h4>Corte solo</h4>
+              <ul>
+                <li>
+                  Cabello corto: <strong>$22.000</strong>
+                </li>
+                <li>
+                  Cabello medio: <strong>$30.000</strong>
+                </li>
+                <li>
+                  Cabello largo: <strong>$40.000</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <form onSubmit={handleReservaFinal}>
             <label>Día disponible (solo sábados)</label>
             <select

@@ -3,6 +3,13 @@ import "./styles/Cursos.css";
 import RutinaReales from "../assets/PAGINA (2).png";
 
 const API_URL = import.meta.env.VITE_API_URL; // ✅ AQUÍ
+const [tipoCabello, setTipoCabello] = useState("");
+
+const preciosMasterclass = {
+  corto: 100000,
+  medio: 110000,
+  largo: 120000,
+};
 
 export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   const [open, setOpen] = useState({ personalizado: false });
@@ -49,6 +56,12 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
 
     if (!cursoPersonalizado) return;
 
+    if (!tipoCabello) {
+      alert("Selecciona tu tipo de cabello");
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -86,6 +99,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           id: cursoPersonalizado.id,
           nombre: cursoPersonalizado.nombre,
           tipo: "Masterclass personalizada",
+          cabello: tipoCabello,
+          precio: preciosMasterclass[tipoCabello],
         },
       ]);
 
@@ -107,6 +122,8 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
         telefono: "",
         comentario: "",
       });
+
+      setTipoCabello("");
     } catch (err) {
       console.error(err);
       alert("Error de conexión con el servidor");
@@ -231,6 +248,18 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
                     value={formData.comentario}
                     onChange={handleChange}
                   />
+
+                  <select
+                    value={tipoCabello}
+                    onChange={(e) => setTipoCabello(e.target.value)}
+                    required
+                  >
+                    <option value="">Selecciona tu tipo de cabello</option>
+                    <option value="corto">Cabello corto - $100.000</option>
+                    <option value="medio">Cabello medio - $110.000</option>
+                    <option value="largo">Cabello largo - $120.000</option>
+                  </select>
+
                   <button type="submit" disabled={loading}>
                     {loading ? "Enviando..." : "Enviar inscripción"}
                   </button>
