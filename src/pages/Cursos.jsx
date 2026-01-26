@@ -47,32 +47,39 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ PROTECCIÓN CLAVE
     if (!cursoPersonalizado) return;
 
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/inscripciones`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nombre: formData.nombre, // ✅ AQUÍ
-          cursoId: cursoPersonalizado.id, // ✅ AQUÍ
-        }),
-      });
+      const res = await fetch(
+        `${API_URL}/api/cursos/${cursoPersonalizado.id}/inscribirse`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nombre: formData.nombre,
+            email: formData.email,
+            telefono: formData.telefono,
+            comentario: formData.comentario,
+          }),
+        }
+      );
+
+      const data = await res.json();
 
       if (!res.ok) {
-        if (res.status === 400 || res.status === 409) {
+        if (data.message === "Cupos agotados") {
           setCursoLlenoModal(true);
           return;
         }
-        throw new Error("Error enviando inscripción");
+        alert(data.message || "Error al inscribirse");
+        return;
       }
 
-      // 👉 AQUÍ PEGAS ESTO
+      // ✅ AGREGAR AL CARRITO
       setCarrito((prev) => [
         ...prev,
         {
@@ -81,9 +88,10 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
           tipo: "Masterclass personalizada",
         },
       ]);
-      setNuevoItem && setNuevoItem(true);
-      // 🔔 activa aviso en header
 
+      setNuevoItem && setNuevoItem(true);
+
+      // ✅ ACTUALIZAR CUPO EN UI
       setCursoPersonalizado((prev) => ({
         ...prev,
         cupoDisponible: prev.cupoDisponible - 1,
@@ -99,9 +107,9 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
         telefono: "",
         comentario: "",
       });
-    } catch (error) {
-      console.error(error);
-      setCursoLlenoModal(true);
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión con el servidor");
     }
 
     setLoading(false);
