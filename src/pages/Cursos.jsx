@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import "./styles/Cursos.css";
 import RutinaReales from "../assets/PAGINA (2).png";
 
-const API_URL = import.meta.env.VITE_API_URL; // ✅ AQUÍ
-const [tipoCabello, setTipoCabello] = useState("");
+const API_URL = import.meta.env.VITE_API_URL; // ✅ AQUÍ;
 
 const preciosMasterclass = {
   corto: 100000,
@@ -12,6 +11,7 @@ const preciosMasterclass = {
 };
 
 export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
+  const [tipoCabello, setTipoCabello] = useState("");
   const [open, setOpen] = useState({ personalizado: false });
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
