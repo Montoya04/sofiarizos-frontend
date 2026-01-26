@@ -301,7 +301,7 @@ export default function ReservaAdmin() {
               <p>Curso: {i.curso}</p>
               <p>Fecha: {i.fechaRegistro}</p>
               <p>Comentario: {i.comentario || "-"}</p>
-              <p>Precio: ${inscripcion.precio.toLocaleString()}</p>
+              <p>Precio: ${i.precio?.toLocaleString() ?? "-"}</p>
 
               <button
                 className="btn-eliminar"
