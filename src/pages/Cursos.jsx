@@ -77,6 +77,7 @@ export default function Cursos({ carrito, setCarrito, setNuevoItem }) {
             email: formData.email,
             telefono: formData.telefono,
             comentario: formData.comentario,
+            precio: preciosMasterclass[tipoCabello],
           }),
         }
       );
