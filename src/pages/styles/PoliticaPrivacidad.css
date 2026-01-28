@@ -1,0 +1,19 @@
+.politica-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.politica-container h1 {
+  margin-bottom: 20px;
+}
+
+.politica-container h2 {
+  margin-top: 30px;
+}
+
+.politica-container ul {
+  margin-left: 20px;
+}
