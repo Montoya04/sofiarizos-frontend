@@ -442,6 +442,20 @@ select[disabled] {
   }
 }
 
+/*Politica de privacidad*/
+
+.legal-text {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.legal-text a {
+  color: #000;
+  text-decoration: underline;
+}
+
 /* Teléfonos MUY pequeños (<= 360px) — iPhone SE / Android mini */
 @media (max-width: 360px) {
   .reserva-completa-container {

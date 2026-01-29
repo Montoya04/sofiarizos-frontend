@@ -1,4 +1,5 @@
 import "./styles/Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -10,16 +11,22 @@ export default function Footer() {
           © 2025 SofiaRizos — Todos los derechos reservados.
         </p>
 
+        {/* POLÍTICA */}
+        <p className="footer-legal">
+          <Link to="/politica-privacidad">Política de Privacidad</Link>
+        </p>
+
         {/* Correo */}
         <p className="footer-email">
           <a href="mailto:soficmrizos@gmail.com">soficmrizos@gmail.com</a>
         </p>
 
+        {/* REDES */}
         <div className="footer-social">
           <a
-            href="https://www.instagram.com/sofiaacorream?igsh=NDNuY3l4YnNzaDE2
-"
+            href="https://www.instagram.com/sofiaacorream?igsh=NDNuY3l4YnNzaDE2"
             target="_blank"
+            rel="noopener noreferrer"
             className="social-icon"
           >
             <svg viewBox="0 0 24 24">
@@ -30,16 +37,16 @@ export default function Footer() {
           <a
             href="https://wa.me/573195951926"
             target="_blank"
+            rel="noopener noreferrer"
             className="social-icon"
           >
             <svg viewBox="0 0 24 24">
-              <path d="M12 2A10 10 0 0 0 2 12a9.93 9.93 0 0 0 1.46 5.25L2 22l4.92-1.43A10 10 0 1 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm4.25-5.19c-.23-.11-1.39-.68-1.61-.76s-.37-.11-.52.11-.6.76-.74.91-.27.17-.5.06a6.63 6.63 0 0 1-3.31-2.9c-.25-.43.25-.4.71-1.33a.44.44 0 0 0 0-.42c-.06-.11-.52-1.25-.71-1.71s-.38-.39-.52-.39h-.45a.86.86 0 0 0-.62.29A2.61 2.61 0 0 0 7 11.12a4.55 4.55 0 0 0 .93 2.39A10.43 10.43 0 0 0 12 16.5a4.9 4.9 0 0 0 2.42.63c.58 0 1.39-.16 1.59-.63s.2-1.16.14-1.26-.2-.11-.39-.2z" />
+              <path d="M12 2A10 10 0 0 0 2 12a9.93 9.93 0 0 0 1.46 5.25L2 22l4.92-1.43A10 10 0 1 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
             </svg>
           </a>
 
           <a
-            href="https://www.tiktok.com/@sofiacorream?_r=1&_t=ZS-91Z0gtdGuZe
-"
+            href="https://www.tiktok.com/@sofiacorream?_r=1&_t=ZS-91Z0gtdGuZe"
             target="_blank"
             rel="noopener noreferrer"
             className="social-icon"

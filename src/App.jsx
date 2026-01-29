@@ -11,6 +11,7 @@ import Carrito from "./pages/Carrito";
 import ReservaAdmin from "./pages/ReservaAdmin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminGuard from "./components/AdminGuard";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad"; // 👈 NUEVO
 
 export default function App() {
   // 🛒 Carrito global
@@ -29,6 +30,7 @@ export default function App() {
       />
 
       <Routes>
+        {/* PÚBLICAS */}
         <Route path="/" element={<Servicios />} />
 
         <Route
@@ -49,10 +51,12 @@ export default function App() {
 
         <Route path="/reserva" element={<Reserva />} />
 
-        {/* LOGIN ADMIN */}
+        {/* POLÍTICA DE PRIVACIDAD */}
+        <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+
+        {/* ADMIN */}
         <Route path="/admin/login" element={<AdminLogin />} />
 
-        {/* PANEL ADMIN */}
         <Route
           path="/admin"
           element={

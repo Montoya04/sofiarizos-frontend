@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import "./styles/Reserva.css";
+import { Link } from "react-router-dom";
 
 // IMPORTAR IMAGENES
 import Ondulado from "../assets/CABELLOS 2_Mesa de trabajo 1.png";
@@ -606,6 +607,11 @@ export default function ReservaCompleta() {
             <button type="submit" disabled={loading}>
               {loading ? "Enviando..." : "Confirmar reserva"}
             </button>
+
+            <p className="legal-text">
+              Al confirmar tu reserva aceptas nuestra{" "}
+              <Link to="/politica-privacidad">Política de Privacidad</Link>.
+            </p>
           </form>
         </div>
       )}
