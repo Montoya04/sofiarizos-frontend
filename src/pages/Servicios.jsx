@@ -8,12 +8,10 @@ import fotoPrincipal from "../assets/PAGINA (2).png";
 // Carrusel
 import carrusel1 from "../assets/DEFINICIÓN ONDAS.png";
 import carrusel2 from "../assets/Definición Rizos.png";
-import carrusel3 from "../assets/DEFINICION AFRO.png";
 
 // Servicios
 import ondasImg from "../assets/Ondas.png";
 import cresposImg from "../assets/Crespos.png";
-import afrosImg from "../assets/afro.png";
 
 export default function Servicios() {
   // Ahora la primera foto será la principal (foto de la clienta)
@@ -60,12 +58,6 @@ export default function Servicios() {
           title="Crespos"
           description="Tratamientos diseñados para dar forma, control y elasticidad a tus crespos. Rizos más definidos, hidratados y con volumen equilibrado."
           img={cresposImg}
-        />
-
-        <ServiceCard
-          title="Afros"
-          description="Cuidado profesional para resaltar tu cabello afro: hidratación profunda, definición y protección para mantener su esencia natural."
-          img={afrosImg}
         />
       </div>
     </div>
