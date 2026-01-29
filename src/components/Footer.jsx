@@ -7,7 +7,11 @@ export default function Footer() {
       <div className="footer-content">
         <h2 className="footer-logo">Sofi</h2>
 
-        {/*Politica de privacidad*/}
+        <p className="footer-text">
+          © 2026 SofiaRizos — Todos los derechos reservados.
+        </p>
+
+        {/* POLÍTICA */}
         <p className="footer-email">
           <a href="/politica-privacidad">Política de Privacidad</a>
         </p>
