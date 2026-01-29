@@ -15,8 +15,7 @@ import cresposImg from "../assets/Crespos.png";
 
 export default function Servicios() {
   // Ahora la primera foto será la principal (foto de la clienta)
-  const imagenes = [fotoPrincipal, carrusel1, carrusel2, carrusel3];
-
+  const imagenes = [fotoPrincipal, carrusel1, carrusel2];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
