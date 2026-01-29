@@ -79,7 +79,7 @@ export default function PoliticaPrivacidad() {
         contactarnos en:
       </p>
       <p>
-        📧 <strong>contacto@sofiarizos.com</strong>
+        📧 <strong>soficmrizos@gmail.com</strong>
       </p>
     </div>
   );
